@@ -1,5 +1,6 @@
 package com.example.eugen.alarmv1;
 
+
 import java.util.UUID;
 
 /**
@@ -13,6 +14,7 @@ public class Alarm {
     private int Minutes;
     private int State;
     private String Melodie;
+    private String daysOfWeek;
 
     public void setName(String name) {
         Name = name;
@@ -61,17 +63,28 @@ public class Alarm {
 
     public Alarm(String name, int hours, int minutes, int state, String melodie) {
         Id = UUID.randomUUID();
-
         Name = name;
         Hours = hours;
         Minutes = minutes;
         State = state;
         Melodie = melodie;
+        daysOfWeek = "1111111";
     }
     public Alarm(UUID id){
         Id = id;
+        daysOfWeek = "1111111";
     }
+
     public Alarm(){
         Id = UUID.randomUUID();
+        daysOfWeek = "1111111";
+    }
+
+    public String getDaysOfWeek() {
+        return daysOfWeek;
+    }
+
+    public void setDaysOfWeek(String daysOfWeek) {
+        this.daysOfWeek = daysOfWeek;
     }
 }

@@ -20,12 +20,14 @@ public class AlarmCursorWrapper extends CursorWrapper {
         int minutes = getInt(getColumnIndex(MyDbContract.AlarmsTable.COLUMN_MINUTES));
         int state = getInt(getColumnIndex(MyDbContract.AlarmsTable.COLUMN_STATE));
         String melodie = getString(getColumnIndex(MyDbContract.AlarmsTable.COLUMN_MELODIE));
+        String daysOfWeek = getString(getColumnIndex(MyDbContract.AlarmsTable.COLUMN_DAYSOFWEEK));
         Alarm alarm = new Alarm(UUID.fromString(uuid));
         alarm.setName(name);
         alarm.setHours(hours);
         alarm.setMinutes(minutes);
         alarm.setState(state);
         alarm.setMelodie(melodie);
+        alarm.setDaysOfWeek(daysOfWeek);
         return alarm;
     }
 }

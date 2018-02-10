@@ -35,18 +35,15 @@ public class MyService extends Service {
         filter.addAction("SOME_OTHER_ACTION");
         this.registerReceiver(broadcastReceiver,filter);
         NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-        //Intent activitystartintent = new Intent(this,AlarmStopActivity.class);
-        //NEW
         Intent activitystartintent = new Intent(this,AnimationStopActivity.class);
-        //
         activitystartintent.putExtra(MainActivity.UUID,uuid);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,activitystartintent,0);
         Notification notification = new Notification.Builder(this)
-                .setContentTitle("Alarm off")
-                .setContentText("Click me")
+                .setContentTitle(getString(R.string.alarmoff))
+                .setContentText(getString(R.string.clicknotif))
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
-                .setSmallIcon(android.R.drawable.sym_def_app_icon)
+                .setSmallIcon(R.drawable.ic_stat_name)
                 .build();
         notificationManager.notify(0,notification);
         if(!isOn){

@@ -32,7 +32,7 @@ public class ApplicationModel {
     }
 
     public void addRow(Alarm alarm){
-        db.insert(AlarmsTable.TABLE_NAME,null,getContentValues(alarm));
+        db.insert(AlarmsTable.TABLE_NAME, null, getContentValues(alarm));
     }
 
     public void updateRow(Alarm alarm){
@@ -87,6 +87,7 @@ public class ApplicationModel {
         cv.put(AlarmsTable.COLUMN_MINUTES,alarm.getMinutes());
         cv.put(AlarmsTable.COLUMN_STATE,alarm.getState());
         cv.put(AlarmsTable.COLUMN_MELODIE,alarm.getMelodie());
+        cv.put(AlarmsTable.COLUMN_DAYSOFWEEK,alarm.getDaysOfWeek());
         return cv;
     }
 }

@@ -8,7 +8,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -18,12 +17,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.Calendar;
-import java.util.Date;
+
 import java.util.List;
-import java.util.UUID;
+
 
 public class MainActivity extends AppCompatActivity implements DeleteMessageDialog.DeleteMessageDialogListener {
     private RecyclerView recyclerView;
@@ -70,7 +67,9 @@ public class MainActivity extends AppCompatActivity implements DeleteMessageDial
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_about) {
-            //Создать диалог about
+            //Диалог about
+            Intent intent = new Intent(this,AboutActivity.class);
+            startActivity(intent);
             return true;
         }
 
@@ -82,12 +81,14 @@ public class MainActivity extends AppCompatActivity implements DeleteMessageDial
         private TextView nameTextView;
         private TextView timeTextView;
         private TextView stateTextView;
+        private TextView daysTextView;
         private Alarm alarm;
         public AlarmHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.item_list,parent,false));
             nameTextView = itemView.findViewById(R.id.nameTextView);
             timeTextView = itemView.findViewById(R.id.timeTextView);
             stateTextView = itemView.findViewById(R.id.stateTextView);
+            daysTextView = itemView.findViewById(R.id.daysTextView);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
         }
@@ -112,6 +113,10 @@ public class MainActivity extends AppCompatActivity implements DeleteMessageDial
             else{
                 stateTextView.setText(getString(R.string.on));
             }
+            String str = alarm.getDaysOfWeek();
+            StringBuffer tmp = new StringBuffer();
+            char[] s = str.toCharArray();
+            daysTextView.setText(charArrtoDays(s));
         }
 
         @Override
@@ -178,6 +183,37 @@ public class MainActivity extends AppCompatActivity implements DeleteMessageDial
         List <Alarm> alarms = applicationModel.getAlarms();
         alarmAdapter.setAlarms(alarms);
         alarmAdapter.notifyDataSetChanged();
+    }
+    public String charArrtoDays(char[] s) {
+        StringBuffer tmp = new StringBuffer();
+        for (int i = 0; i < s.length; i++) {
+            if (s[i] == '1') {
+                switch (i) {
+                    case 0:
+                        tmp.append(getString(R.string.mon) + " ");
+                        break;
+                    case 1:
+                        tmp.append(getString(R.string.tues) + " ");
+                        break;
+                    case 2:
+                        tmp.append(getString(R.string.wed) + " ");
+                        break;
+                    case 3:
+                        tmp.append(getString(R.string.thurs) + " ");
+                        break;
+                    case 4:
+                        tmp.append(getString(R.string.fri) + " ");
+                        break;
+                    case 5:
+                        tmp.append(getString(R.string.sat) + " ");
+                        break;
+                    case 6:
+                        tmp.append(getString(R.string.sun));
+                        break;
+                }
+            }
+        }
+        return tmp.toString();
     }
 
 }

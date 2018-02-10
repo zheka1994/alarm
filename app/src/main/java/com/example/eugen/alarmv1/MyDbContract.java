@@ -16,6 +16,7 @@ public class MyDbContract {
         public static final String COLUMN_MINUTES = "minutes";
         public static final String COLUMN_STATE = "state";
         public static final String COLUMN_MELODIE = "melodie";
+        public static final String COLUMN_DAYSOFWEEK = "daysofweek";
         public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " +
                 TABLE_NAME + " (" +
                 _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -24,6 +25,8 @@ public class MyDbContract {
                 COLUMN_HOURS + " INTEGER, " +
                 COLUMN_MINUTES + " INTEGER, " +
                 COLUMN_STATE + " INTEGER, " +
-                COLUMN_MELODIE + " TEXT" + ")";
+                COLUMN_MELODIE + " TEXT," +
+                COLUMN_DAYSOFWEEK + " TEXT" +
+                ")";
     }
 }

@@ -27,6 +27,16 @@
         android:textSize="16sp"
         android:textColor="@color/grey"
        />
+    <TextView
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="8dp"
+        android:id="@+id/daysTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/grey"
+        />
 
     <TextView
         android:paddingLeft="8dp"

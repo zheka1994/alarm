@@ -28,10 +28,11 @@ import android.widget.Toast;
 import java.util.Calendar;
 import java.util.UUID;
 
-public class AlarmActivity extends AppCompatActivity implements View.OnClickListener, ChoiseSourseDialogFragment.ChoiseSourseDialogFragmentListener,AppMusicChoiseDialogFragment.AppMusicChoiseDialogFragmentListener{
+public class AlarmActivity extends AppCompatActivity implements View.OnClickListener, ChoiseSourseDialogFragment.ChoiseSourseDialogFragmentListener,AppMusicChoiseDialogFragment.AppMusicChoiseDialogFragmentListener, ChooseDaysDialogFragment.ChooseDaysOfWeekListener{
     private TimePicker timePicker;
     private EditText nameEditText;
     private Button choiseMusicButton;
+    private Button choiseDaysOfWeekButton;
     private Button okButton;
     private Button cancelButton;
     private int action;
@@ -54,9 +55,11 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
         choiseMusicButton = (Button)findViewById(R.id.ChoiseRingtonebutton);
         okButton = (Button)findViewById(R.id.OkButton);
         cancelButton = (Button)findViewById(R.id.CancelButton);
+        choiseDaysOfWeekButton = (Button)findViewById(R.id.ChoiseDayOfWeek);
         choiseMusicButton.setOnClickListener(this);
         okButton.setOnClickListener(this);
         cancelButton.setOnClickListener(this);
+        choiseDaysOfWeekButton.setOnClickListener(this);
         action = getIntent().getIntExtra(MainActivity.ACTION,0);
         Uri uri = null;
         if(action == 0){
@@ -95,6 +98,19 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
             DialogFragment dialogFragment = new ChoiseSourseDialogFragment();
             dialogFragment.show(getSupportFragmentManager(),"ChoiseMusic");
         }
+        else if(view == choiseDaysOfWeekButton){
+            //Выбираем дни недели
+            DialogFragment dialogFragment = null;
+            switch (action) {
+                case 0:
+                    dialogFragment = ChooseDaysDialogFragment.newInstance(null, 0);
+                    break;
+                case 1:
+                    dialogFragment = ChooseDaysDialogFragment.newInstance(alarm.getId(), 1);
+                    break;
+            }
+                dialogFragment.show(getSupportFragmentManager(), "ChooseDays");
+        }
         else if(view == okButton){
             String name = nameEditText.getText().toString();
             Calendar calendar = Calendar.getInstance();
@@ -107,7 +123,6 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
                 calendar.set(Calendar.MINUTE,timePicker.getCurrentMinute());
             }
             calendar.set(Calendar.SECOND,0);
-            Toast.makeText(AlarmActivity.this,""+calendar.get(Calendar.HOUR),Toast.LENGTH_LONG).show();
             alarm.setName(name);
             alarm.setHours(calendar.get(Calendar.HOUR_OF_DAY));
             alarm.setMinutes(calendar.get(Calendar.MINUTE));
@@ -156,7 +171,6 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onFinishDialog(int v) {
         Uri fileUri = null;
-        Toast.makeText(this,""+v,Toast.LENGTH_LONG).show();
         switch(v){
             case 0:
                 fileUri = Uri.parse("android.resource://com.example.eugen.alarmv1/"+R.raw.alarm1);
@@ -253,19 +267,28 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
        alarmIntent.putExtra(SERVICE,true);
        alarmIntent.putExtra(MainActivity.UUID,alarm.getId());
        PendingIntent pendingIntent = PendingIntent.getBroadcast(this,alarm.getId().hashCode(),alarmIntent,0);
-       Calendar calendar1 = Calendar.getInstance();
-       if(calendar1.get(Calendar.HOUR)<=calendar.get(Calendar.HOUR) && calendar1.get(Calendar.MINUTE)<calendar.get(Calendar.MINUTE)) {
-           if (Build.VERSION.SDK_INT < 19)
-               alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 86400000, pendingIntent);
-           else
-               alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-       }
-       else {
-           if (Build.VERSION.SDK_INT < 19)
-               alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis()+86400000, 86400000, pendingIntent);
-           else
-               alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis()+86400000, pendingIntent);
-       }
+       DayWeek dayWeek = new DayWeek(calendar);
+       int next = dayWeek.getNextAlarm(alarm);
+        if(next != -1) {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + next * 24 * 60 * 60 * 1000, pendingIntent);
+                int t = calendar.get(Calendar.DAY_OF_MONTH)+next;
+                calendar.set(Calendar.DAY_OF_MONTH,t);
+                long timeUp = calendar.getTimeInMillis();
+                long diff = timeUp - System.currentTimeMillis();
+                long diffSeconds = diff / 1000 % 60;
+                long diffMinutes = diff / (60 * 1000) % 60;
+                long diffHours = diff / (60 * 60 * 1000) % 24;
+                long diffDays = diff / (24 * 60 * 60 * 1000);
+                StringBuilder sb = new StringBuilder();
+                sb.append(this.getResources().getQuantityString(R.plurals.days,(int)diffDays,(int)diffDays));
+                sb.append(", ");
+                sb.append(this.getResources().getQuantityString(R.plurals.hours,(int)diffHours,(int)diffHours));
+                sb.append(", ");
+                sb.append(this.getResources().getQuantityString(R.plurals.minutes,(int)diffMinutes,(int)diffMinutes));
+                sb.append(", ");
+                sb.append(this.getResources().getQuantityString(R.plurals.seconds,(int)diffSeconds,(int)diffSeconds));
+                Toast.makeText(this,getString(R.string.alarmthrow)+" "+sb.toString(),Toast.LENGTH_LONG).show();
+        }
     }
     public void stopAlarm(){
       if(alarmManager!=null){
@@ -276,5 +299,10 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
                 sendBroadcast(alarmIntent);
             }
         }
+    }
+
+    @Override
+    public void onFinishChooseDay(String s) {
+        alarm.setDaysOfWeek(s);
     }
 }
