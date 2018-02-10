@@ -8,4 +8,4 @@ This is a simple alarm manager, which allows you to schedule your awakening. Thi
 5. Run this file on your android device.
 ## User guide
 1. When apllication was started you will see this GUI. 
-![alt text](https://github.com/zheka1994/alarm/blob/master/User%20guide/One.png).
+![alt text](https://github.com/zheka1994/alarm/blob/master/User%20guide/One1.png).
