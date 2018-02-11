@@ -14,10 +14,10 @@ This is a simple alarm manager, which allows you to schedule your awakening. Thi
 2. If you want to create a new Alarm clock you need to click on floating button “+”.
 3. If you click on plus you will see this window
 
-![alt text](https://github.com/zheka1994/alarm/blob/master/User%20guide/One.png).
+![alt text](https://github.com/zheka1994/alarm/blob/master/User%20guide/Two.png).
 
-    + You can think of alarm name and write it into a text field.
-    + You can select a ringtone which will be play when you should wake up.
+  + You can think of alarm name and write it into a text field.
+  + You can select a ringtone which will be play when you should wake up.
 You can select a source of music (SD card or music from application).
 Рисунок 3.
 3.2.1	If you select a music from SD card you will see this dialog
