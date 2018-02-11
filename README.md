@@ -19,12 +19,18 @@ This is a simple alarm manager, which allows you to schedule your awakening. Thi
   + You can think of alarm name and write it into a text field.
   + You can select a ringtone which will be play when you should wake up.
 You can select a source of music (SD card or music from application).
-Рисунок 3.
-3.2.1	If you select a music from SD card you will see this dialog
-Рисунок 4.
+
+![alt text](https://github.com/zheka1994/alarm/blob/master/User%20guide/Three.png).
+
+  * If you select a music from SD card you will see this dialog
+
+![alt text](https://github.com/zheka1994/alarm/blob/master/User%20guide/Four.png).
+
 or dialog which ask your permission to use your SD card.
-3.2.2	If you select a standard application music you see this dialog.
-Рисунок 5.
+  * If you select a standard application music you see this dialog.
+
+![alt text](https://github.com/zheka1994/alarm/blob/master/User%20guide/Five.png).
+
 You can select one of this items.
 3.3	You can select days in which the alarm will ring.
 Рисунок 6.
