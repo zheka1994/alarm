@@ -32,18 +32,27 @@ or dialog which ask your permission to use your SD card.
 ![alt text](https://github.com/zheka1994/alarm/blob/master/User%20guide/Five.png).
 
 You can select one of this items.
-3.3	You can select days in which the alarm will ring.
-Рисунок 6.
+  + You can select days in which the alarm will ring.
+
+![alt text](https://github.com/zheka1994/alarm/blob/master/User%20guide/Six.png).
+
 You need to switch on alarm. For this you need clicked on element which 
 is located at the top of toolbar.
-3.4	If you confirm your changes you will see this message on which is shown how much time left to start alarm.
-Рисунок 7.
-3.5	If click cancel alarm will not create.
-4.	If you want to edit your alarm you need to click on this alarm item.
-5.	If you want to delete your alarm you need to do long click on this item. You will see this dialog.
-Рисунок 8.
-6.	You can close your application. When alarm sounds you will see notification.
-Рисунок 9.
+  + If you confirm your changes you will see this message on which is shown how much time left to start alarm.
+
+![alt text](https://github.com/zheka1994/alarm/blob/master/User%20guide/Seven.png).
+
+  + If click cancel alarm will not create.
+4. If you want to edit your alarm you need to click on this alarm item.
+5. If you want to delete your alarm you need to do long click on this item. You will see this dialog.
+
+![alt text](https://github.com/zheka1994/alarm/blob/master/User%20guide/Eight.png).
+
+6. You can close your application. When alarm sounds you will see notification.
+
+![alt text](https://github.com/zheka1994/alarm/blob/master/User%20guide/Nine.png).
+
 7.	Click on this notification. You will see animation of bell. Click it and the sound will stop.
-Рисунок 10.
+
+![alt text](https://github.com/zheka1994/alarm/blob/master/User%20guide/Ten.png).
 
